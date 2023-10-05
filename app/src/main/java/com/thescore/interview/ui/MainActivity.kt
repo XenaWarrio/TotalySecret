@@ -1,6 +1,7 @@
 package com.thescore.interview.ui
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.thescore.interview.databinding.ActivityMainBinding
@@ -34,9 +35,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setObservers(){
-        viewModel.teamListLiveData.observe(this){
+    private fun setObservers() {
+        viewModel.teamListLiveData.observe(this) {
             teamsAdapter.setTeams(it)
+        }
+        viewModel.teamListError.observe(this) {
+            Toast.makeText(this, it, Toast.LENGTH_LONG).show()
         }
     }
 }
